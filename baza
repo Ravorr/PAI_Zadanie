@@ -1,0 +1,87 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Czas generowania: 05 Maj 2020, 15:45
+-- Wersja serwera: 10.4.8-MariaDB
+-- Wersja PHP: 7.1.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Baza danych: `gry`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `gra`
+--
+
+CREATE TABLE `gra` (
+  `nazwa_gry` varchar(250) COLLATE utf8_polish_ci NOT NULL,
+  `rodzaj` varchar(250) COLLATE utf8_polish_ci NOT NULL,
+  `producent` varchar(250) COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `producent`
+--
+
+CREATE TABLE `producent` (
+  `nazwa` varchar(250) COLLATE utf8_polish_ci NOT NULL,
+  `kraj` varchar(250) COLLATE utf8_polish_ci NOT NULL,
+  `rok` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `producent`
+--
+
+INSERT INTO `producent` (`nazwa`, `kraj`, `rok`) VALUES
+('cdp', 'polska', 1999),
+('xd', 'lol', 12456);
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indeksy dla tabeli `gra`
+--
+ALTER TABLE `gra`
+  ADD PRIMARY KEY (`nazwa_gry`),
+  ADD KEY `fk_producent` (`producent`);
+
+--
+-- Indeksy dla tabeli `producent`
+--
+ALTER TABLE `producent`
+  ADD PRIMARY KEY (`nazwa`);
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `gra`
+--
+ALTER TABLE `gra`
+  ADD CONSTRAINT `fk_producent` FOREIGN KEY (`producent`) REFERENCES `producent` (`nazwa`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
