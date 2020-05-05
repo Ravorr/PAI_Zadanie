@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>panel admina</title>
+</head>
+<body>
+<tr>
+
+</tr>
+<br> 
+<select>
+    <?php
+include "polacz.php";
+if ($sql =  $baza->prepare("SELECT * FROM producent ORDER BY nazwa"))
+{
+        $sql->execute();
+        $sql->bind_result($nazwa, $kraj , $rok);
+        while ($sql->fetch())
+        {
+                echo "
+               
+                    <option>$nazwa</option>
+                
+                ";
+        }
+        $sql->close();
+ }
+else die( "Błąd w zapytaniu SQL! Sprawdź kod SQL w PhpMyAdmin: ". $baza->error );
+
+ $baza->close();
+?>
+</select>
+<br>
+  <a href="dodaj.php">Dodawanie nowego</a>
+</body>
+</html>
